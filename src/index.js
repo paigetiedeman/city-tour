@@ -2,7 +2,53 @@ import $ from "jquery";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/styles.css";
-// import cityTour from './js/city-tour.js';
+import cityTour from "./js/city-tour.js";
+
+async function makeApiCall() {
+  const response = await cityTour.getTour();
+  console.log(response);
+}
+
+$(document).ready(function () {
+  // $('#btn').click(function (event) {
+  //   event.preventDefault();
+  // });
+  $("#get-location").submit(function (e) {
+    e.preventDefault();
+    // const location = $('#location').val();
+    console.log(data);
+    makeApiCall();
+  });
+
+  $("#display-button").click(function () {
+    const items = data.results[0].days[0].itinerary_items;
+    console.log(items);
+    const item = items[0];
+    console.log(item);
+
+    const pointHtml = `<div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="${item.poi.images[0].sizes.thumbnail.url}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">${item.poi.name}</h5>
+        <p class="card-text">${item.description}</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>`;
+
+    $("#container").append(pointHtml);
+
+    // const poiHtml = pointsOfInterest.map(point => {
+    //   return `<div class="card" style="width: 18rem;">
+    //   <img class="card-img-top" src="..." alt="Card image cap">
+    //   <div class="card-body">
+    //     <h5 class="card-title">Card title</h5>
+    //     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    //     <a href="#" class="btn btn-primary">Go somewhere</a>
+    //   </div>
+    // </div>`
+    // })
+  });
+});
 
 const data = {
   results: [
@@ -2862,51 +2908,3 @@ const data = {
   more: false,
   is_deprecated: "no",
 };
-
-$(document).ready(function () {
-  $("#get-location").submit(function (e) {
-    e.preventDefault();
-    // const location = $('#location').val();
-    // console.log(location);
-    
-    
-  });
-
-  $("#display-button").click(function() {
-    // const location1 = data.results[0].location;
-    // console.log(location1.id, location1.snippet);
-    // const pointsOfInterest = location1.images.slice(0,4);
-    // console.table(pointsOfInterest);
-    // const point = pointsOfInterest[0];
-    const items = data.results[0].days[0].itinerary_items;
-    console.log(items);
-    const item = items[0];
-    console.log(item);
-    
-
-    const pointHtml = `<div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="${item.poi.images[0].sizes.thumbnail.url}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">${item.poi.name}</h5>
-        <p class="card-text">${item.description}</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>`;
-
-    $("#container").append(pointHtml);
-
-    // const poiHtml = pointsOfInterest.map(point => {
-    //   return `<div class="card" style="width: 18rem;">
-    //   <img class="card-img-top" src="..." alt="Card image cap">
-    //   <div class="card-body">
-    //     <h5 class="card-title">Card title</h5>
-    //     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    //     <a href="#" class="btn btn-primary">Go somewhere</a>
-    //   </div>
-    // </div>`
-    // })
-  })
-  
-
-
-});
