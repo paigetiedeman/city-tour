@@ -6,6 +6,7 @@
   flex-wrap: wrap;
   height: 300px;
   width: auto;
+  margin-bottom: 15px;
   /* background: #e5989b; */
 }
 
@@ -67,3 +68,12 @@
   display: inline-block;
   color: #f33d0b;
 }
+
+.card-deck {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  justify-content: space-evenly;
+}
+
+
