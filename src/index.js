@@ -1,8 +1,8 @@
-import $ from 'jquery';
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/styles.css';
-import cityTour from './js/city-tour.js';
+import $ from "jquery";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./css/styles.css";
+import cityTour from "./js/city-tour.js";
 
 async function makeApiCall(city) {
   console.log(city);
@@ -21,7 +21,7 @@ function displayResult(items) {
   const pointsHtml = items
     .map((item) => {
       let imageUrl =
-        'https://images.unsplash.com/photo-1523665307251-7f4e0e7b23fc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80';
+        "https://images.unsplash.com/photo-1523665307251-7f4e0e7b23fc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80";
       if (item.poi.images.length > 0) {
         imageUrl = item.poi.images[0].sizes.thumbnail.url;
       }
@@ -34,21 +34,62 @@ function displayResult(items) {
     </div>
   </div>`;
     })
-    .join('');
-  $('#container').hide();
-  $('#cityDisplay').empty();
-  $('#cityDisplay').append(pointsHtml);
-  $('#cityDisplay').after(`<img src=https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/-122.3493,47.6205,14/600x600?access_token=${process.env.MAP_KEY}>`)
+    .join("");
+  $("#container").hide();
+  $("#cityDisplay").empty();
+  $("#cityDisplay").append(pointsHtml);
+  const geo = createGeoJson(items);
+  console.log(geo);
+  // $("#cityDisplay").after(
+  //   `<img src=https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/-122.3493,47.6205,14/600x600?access_token=${process.env.MAP_KEY}>`
+  // );
 }
 
 $(document).ready(function () {
-  $('.city').click(function () {
+  $(".city").click(function () {
     const cityName = this.id;
     makeApiCall(cityName);
   });
-
-  $("#display-button").click(function () {
-    // makeMapApiCall();
-    
-  });
 });
+
+function createGeoJson(items) {
+  console.log(
+    items[0].poi.coordinates.latitude,
+    items[0].poi.coordinates.longitude,
+    items[0].poi.name
+  );
+
+  const features = items.map((item) => {
+    return {
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: [
+          item.poi.coordinates.latitude,
+          item.poi.coordinates.longitude,
+        ],
+      },
+      properties: {
+        title: item.poi.name,
+      },
+    };
+  });
+  console.log(features);
+  // const features = [
+  //   {
+  //     type: "Feature",
+  //     geometry: {
+  //       type: "Point",
+  //       coordinates: [0, 0],
+  //     },
+  //     properties: {
+  //       title: "A title",
+
+  //     },
+  //   },
+  // ]
+  // const base = {
+  //   type: "FeatureCollection",
+  //   features: features,
+  // };
+}
