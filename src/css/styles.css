@@ -76,4 +76,10 @@
   justify-content: space-evenly;
 }
 
+#map-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 

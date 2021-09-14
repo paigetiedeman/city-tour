@@ -39,10 +39,9 @@ function displayResult(items) {
   $("#cityDisplay").empty();
   $("#cityDisplay").append(pointsHtml);
   const geo = createGeoJson(items);
-  console.log(geo);
-  // $("#cityDisplay").after(
-  //   `<img src=https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/-122.3493,47.6205,14/600x600?access_token=${process.env.MAP_KEY}>`
-  // );
+  $("#map-wrapper").append(
+    `<img src=https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/geojson(${geo})/${items[0].poi.coordinates.longitude},${items[0].poi.coordinates.latitude},12/600x600?access_token=${process.env.MAP_KEY}>`
+  );
 }
 
 $(document).ready(function () {
@@ -53,43 +52,26 @@ $(document).ready(function () {
 });
 
 function createGeoJson(items) {
-  console.log(
-    items[0].poi.coordinates.latitude,
-    items[0].poi.coordinates.longitude,
-    items[0].poi.name
-  );
-
-  const features = items.map((item) => {
+  const features = items.map((item, i) => {
     return {
       type: "Feature",
       geometry: {
         type: "Point",
         coordinates: [
-          item.poi.coordinates.latitude,
           item.poi.coordinates.longitude,
+          item.poi.coordinates.latitude,
         ],
       },
       properties: {
-        title: item.poi.name,
+        "marker-symbol": (i + 1).toString(),
       },
     };
   });
-  console.log(features);
-  // const features = [
-  //   {
-  //     type: "Feature",
-  //     geometry: {
-  //       type: "Point",
-  //       coordinates: [0, 0],
-  //     },
-  //     properties: {
-  //       title: "A title",
+  
+  const geoJsonObject = {
+    type: "FeatureCollection",
+    features: features,
+  };
 
-  //     },
-  //   },
-  // ]
-  // const base = {
-  //   type: "FeatureCollection",
-  //   features: features,
-  // };
+  return encodeURIComponent(JSON.stringify(geoJsonObject));
 }
