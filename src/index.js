@@ -5,21 +5,20 @@ import "./css/styles.css";
 import cityTour from "./js/city-tour.js";
 // import MapService from "./js/map-service";
 
-async function makeApiCall() {
-  const response = await cityTour.getTour();
-  console.log(response.results[0].days[0].itinerary_items);
+async function makeApiCall(city) {
+  const response = await cityTour.getTour(city);
   displayResult(response.results[0].days[0].itinerary_items);
-
 }
 
-// async function makeMapApiCall() {
-//   const response = await MapService.getMap();
-//   console.log(response);
-// }
+// let city1 = $("#Seattle").val();
+// let city2 = $("#Amsterdam").val();
+// let city3 = $("#London").val();
+// let city4 = $("#Barcelona").val();
+// let city5 = $("#Paris").val();
+// let city6 = $("#Tokyo").val();
 
 function displayResult(items) {
   const pointsHtml = items.map(item => {
-    console.log(item);
     let imageUrl = 'https://images.unsplash.com/photo-1523665307251-7f4e0e7b23fc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80';
     if(item.poi.images.length > 0) {
       imageUrl = item.poi.images[0].sizes.thumbnail.url;
@@ -38,8 +37,7 @@ function displayResult(items) {
 }
 
 $(document).ready(function () {
-  // $('#btn').click(function (event) {
-  //   event.preventDefault();
+  // $('#Seattle').click(function (event) {
   // });
   $("#get-location").submit(function (e) {
     e.preventDefault();
@@ -49,6 +47,6 @@ $(document).ready(function () {
 
   $("#display-button").click(function () {
     // makeMapApiCall();
-    $("#container").append(`<img src=https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/-122.3493,47.6205,14/600x600?access_token=${process.env.MAP_KEY}>`);
+    
   });
 });
