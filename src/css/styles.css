@@ -1,21 +1,35 @@
-
-h1, h2 {
-  text-align: center;
+/*  colors: #bf764c #e1d7c2 #4a5e6c #90926f */
+body {
+  background-color: #e1d7c2;
+  font-family: 'Abril Fatface', cursive;
+  font-size: 24px;
 }
 
 .jumbotron {
-  background-image: src="./assets/images/header.jpg"
+  background-image: url("../assets/images/cityscape.jpg");
+  background-color: #90926f;
+  background-repeat: no-repeat;
+  background-position: right;
+  height: 200px;
+  text-align: left;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
 }
+
 #flex-container {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
-  height: 300px;
+  height: auto;
   width: auto;
   margin-bottom: 15px;
-  /* background: #e5989b; */
+  background: #bf764c;
+  border-radius: 10px;
+  margin-top: 15px;
+  padding: 20px;
 }
 
 .city {
@@ -26,6 +40,7 @@ h1, h2 {
   border: 2px solid black;
   font-family: 'Kavoon', cursive;
   font-size: 26px;
+  margin: 2px;
 }
 
 #Seattle {
@@ -77,6 +92,11 @@ h1, h2 {
   color: #f33d0b;
 }
 
-
+.card {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  background-color: #4a5e6c;
+  color: white;
+}
 
 
