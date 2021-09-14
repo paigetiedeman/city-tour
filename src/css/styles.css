@@ -100,4 +100,10 @@ body {
   margin: 5px;
 }
 
+#map-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 

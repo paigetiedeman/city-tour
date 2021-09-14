@@ -27,15 +27,44 @@ function displayResult(items) {
     </div>
   </div>`;
     })
-    .join('');
-  $('#container').hide();
-  $('#cityDisplay').empty();
-  $('#cityDisplay').append(pointsHtml);
+    .join("");
+  $("#container").hide();
+  $("#cityDisplay").empty();
+  $("#cityDisplay").append(pointsHtml);
+  const geo = createGeoJson(items);
+  $("#map-wrapper").append(
+    `<img src=https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/geojson(${geo})/${items[0].poi.coordinates.longitude},${items[0].poi.coordinates.latitude},12/600x600?access_token=${process.env.MAP_KEY}>`
+  );
 }
 
 $(document).ready(function () {
-  $('.city').click(function () {
+  $(".city").click(function () {
     const cityName = this.id;
     makeApiCall(cityName);
   });
 });
+
+function createGeoJson(items) {
+  const features = items.map((item, i) => {
+    return {
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: [
+          item.poi.coordinates.longitude,
+          item.poi.coordinates.latitude,
+        ],
+      },
+      properties: {
+        "marker-symbol": (i + 1).toString(),
+      },
+    };
+  });
+  
+  const geoJsonObject = {
+    type: "FeatureCollection",
+    features: features,
+  };
+
+  return encodeURIComponent(JSON.stringify(geoJsonObject));
+}
