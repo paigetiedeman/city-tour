@@ -6,88 +6,64 @@
   flex-wrap: wrap;
   height: 300px;
   width: auto;
+  /* background: #e5989b; */
+}
+
+.city {
+  height: 125px;
+  width: 175px;
+  text-align: center;
+  padding-top: 45px;
+  border: 2px solid black;
   font-family: 'Kavoon', cursive;
   font-size: 26px;
-  background: #e5989b;
 }
 
 #Seattle {
-  border: 2px solid black;
   background: url(https://images.unsplash.com/photo-1535581652167-3a26c90bbf86?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
-  display: inline-block;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 125px;
-  width: 175px;
-  text-align: center;
-  padding-top: 45px;
+  display: inline-block;
   color: #ffcd57;
-
 }
 
 #Amsterdam {
-  border: 2px solid black;
   background: url(https://images.unsplash.com/photo-1536880756060-98a6a140f0a7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
-  display: inline-block;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 125px;
-  width: 175px;
-  text-align: center;
-  padding-top: 45px;
+  display: inline-block;
   color: #89c2d9;
-
 }
 
 #London {
-  border: 2px solid black;
   background: url(https://images.unsplash.com/photo-1505761671935-60b3a7427bad?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
-  display: inline-block;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 125px;
-  width: 175px;
-  text-align: center;
-  padding-top: 45px;
+  display: inline-block;
   color: #9e0059;
 
 }
 
 #Barcelona {
-  border: 2px solid black;
   background: url(https://images.unsplash.com/photo-1597032868256-1f659aeb0d49?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1267&q=80);
-  display: inline-block;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 125px;
-  width: 175px;
-  text-align: center;
-  padding-top: 45px;
+  display: inline-block;
   color: white;
 }
 
 #Paris {
-  border: 2px solid black;
   background: url(https://images.unsplash.com/photo-1458262488536-98366625ae59?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1048&q=80);
-  display: inline-block;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 125px;
-  width: 175px;
-  text-align: center;
-  padding-top: 45px;
+  display: inline-block;
   color: #007200;
 }
 
 #Tokyo {
-  border: 2px solid black;
   background: url(https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1051&q=80);
-  display: inline-block;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 125px;
-  width: 175px;
-  text-align: center;
-  padding-top: 45px;
+  display: inline-block;
   color: #f33d0b;
 }

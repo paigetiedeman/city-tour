@@ -5,8 +5,11 @@ import "./css/styles.css";
 import cityTour from "./js/city-tour.js";
 
 async function makeApiCall(city) {
+  console.log(city);
   const response = await cityTour.getTour(city);
+  
   displayResult(response.results[0].days[0].itinerary_items);
+
 }
 
 // let city1 = $("#Seattle").val();
@@ -31,15 +34,13 @@ function displayResult(items) {
     </div>
   </div>`;
   }).join("");
-
-  $("#container").append(pointsHtml);
+  $("#cityDisplay").empty();
+  $("#cityDisplay").append(pointsHtml);
 }
 
 $(document).ready(function () {
-  // $('#Seattle').click(function (event) {
-  // });
-  $("#get-location").submit(function (e) {
-    e.preventDefault();
-    makeApiCall();
+  $(".city").click(function () {
+    const cityName = this.id;
+    makeApiCall(cityName);
   });
 });
