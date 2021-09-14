@@ -15,7 +15,6 @@ function displayResult(items) {
   const pointsHtml = items
     .map((item) => {
       let imageUrl = Default;
-      // 'https://images.unsplash.com/photo-1523665307251-7f4e0e7b23fc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80';
       if (item.poi.images.length > 0) {
         imageUrl = item.poi.images[0].sizes.thumbnail.url;
       }
