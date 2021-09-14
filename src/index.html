@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kavoon&display=swap" rel="stylesheet">
   <title>City Tour</title>
 </head>
 
@@ -13,14 +16,16 @@
     <h1>What sort of mood are you in?</h1>
     <form id="get-location">
       <!-- <input type="text" id="location" placeholder="ex: Paris" /><br /> -->
+      <!-- Use .click for each div, display results in card format in #city div -->
     <div id="flex-container">
       <div id="Seattle">Happy</div>
       <div id="Amsterdam">Relaxed</div>
       <div id="London">Random</div>
       <div id="Barcelona">Active</div>
       <div id="Paris">Sad</div>
-      <div id="Tokyo">Inquisitive??</div>
+      <div id="Tokyo">Inquisitive</div>
   </div>
+  <br>
   <div id="city"></div>
   <button class="btn-success" id="location-info">Go here</button>
   </form>

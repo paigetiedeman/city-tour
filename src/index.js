@@ -4,12 +4,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/styles.css";
 import cityTour from "./js/city-tour.js";
 
-async function makeApiCall() {
-  const response = await cityTour.getTour();
+async function makeApiCall(city) {
+  const response = await cityTour.getTour(city);
   console.log(response.results[0].days[0].itinerary_items);
   displayResult(response.results[0].days[0].itinerary_items);
-
 }
+
+// let city1 = $("#Seattle").val();
+// let city2 = $("#Amsterdam").val();
+// let city3 = $("#London").val();
+// let city4 = $("#Barcelona").val();
+// let city5 = $("#Paris").val();
+// let city6 = $("#Tokyo").val();
 
 function displayResult(items) {
   const pointsHtml = items.map(item => {
@@ -32,12 +38,10 @@ function displayResult(items) {
 }
 
 $(document).ready(function () {
-  // $('#btn').click(function (event) {
-  //   event.preventDefault();
+  // $('#Seattle').click(function (event) {
   // });
   $("#get-location").submit(function (e) {
     e.preventDefault();
-    // const location = $('#location').val();
     console.log(data);
     makeApiCall();
   });
