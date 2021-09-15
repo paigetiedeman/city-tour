@@ -118,4 +118,4 @@ function displayMovies(films) {
         });
     }
   }
-}
+
