@@ -18,14 +18,16 @@ function displayResult(items) {
       if (item.poi.images.length > 0) {
         imageUrl = item.poi.images[0].sizes.thumbnail.url;
       }
-      return `<div class="card col-md-4" style="width: 18rem;">
-    <img class="card-img-top" src=${imageUrl} alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">${item.poi.name}</h5>
-      <p class="card-text">${item.description}</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-  </div>`;
+      return `<div class="col my-3">
+        <div class="card mx-auto h-100" style="width: 18rem;">
+          <img class="card-img-top" src=${imageUrl} alt="Card image cap">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">${item.poi.name}</h5>
+            <p class="card-text">${item.description}</p>
+            <a href="#" class="btn btn-primary mt-auto">Go somewhere</a>
+          </div>
+        </div>
+      </div>`;
     })
     .join("");
   $("#container").hide();
