@@ -169,3 +169,10 @@ p {
   text-shadow: 2px 2px rgba(0, 0, 0, 0.568);
   border-bottom: 1.5px solid #4a5e6c;
 }
+
+.test-button {
+  border-radius: 10px; 
+  font-size: 18px; 
+  color: white;
+  background-color: #4a5e6c; 
+}
