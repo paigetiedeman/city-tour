@@ -9,32 +9,13 @@
 </head>
 
 <body>
-  <nav id="navBar" class="navbar">
-    <a class="nav-link mr-auto p-2" href="#">Pick a new mood</a>
-    
-    <div>
-      <ul class="p-2 navbar-nav d-flex flex-row">
-        <li class="nav-item pe-2">
-          <a class="nav-link" href="#map-wrapper">Map</a>
-        </li>
-        <li class="nav-item pe-2">
-          <a class="nav-link" href="#">Food</a>
-        </li>
-        <li class="nav-item pe-2">
-          <a class="nav-link" href="#">Outdoors</a>
-        </li>
-        <li class="nav-item pe-2">
-          <a class="nav-link" href="#">Movies</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  
 
   <div id="container" class="py-4 container">
-  <div class="jumbotron jumbotron-fluid">
-    <h1>Moody Day Tours</h1>
-    <p>Choose from below to receive a tour!</p>
-  </div>
+    <div class="jumbotron jumbotron-fluid">
+      <h1>Moody Day Tours</h1>
+      <p>Choose from below to receive a tour!</p>
+    </div>
     <div id="flex-container">
       <div id="Seattle" class="city">Happy</div>
       <div id="Amsterdam" class="city">Relaxed</div>
@@ -45,22 +26,60 @@
       <div id="Sydney" class="city">Energetic</div>
       <div id="London" class="city">Surprise</div>
     </div>
-    <br>
-    <div class="movies">
-    <div class="row" id="movies">
+  </div>
 
+  <nav id="navBar" class="hidden navbar">
+    
+    <div>
+      <ul class="p-2 navbar-nav d-flex flex-row">
+        <li class="nav-link mr-auto p-2" id="reset-button">Pick a new mood</li>
+        <div id="right" class="ml-auto d-flex flex-row">
+          <li class="nav-item pe-2">
+            <a class="nav-link" href="#cityDisplay">Tour</a>
+          </li>
+          <li class="nav-item pe-2">
+            <a class="nav-link" href="#map-wrapper">Map</a>
+          </li>
+          <li class="nav-item pe-2">
+            <a class="nav-link" href="#outdoors-search">Outdoors</a>
+          </li>
+          <li class="nav-item pe-2">
+            <a class="nav-link" href="#movies">Movies</a>
+          </li>
+        </div>
+      </ul>
     </div>
-    <button class="test-button" type="button">Press Here!</button>
-  </div>
-  </div>
-  <br>
-  <div class="container">
-    <div class="dayPlan"><h2>Your Day Plan:</h2>
+  </nav>
+
+  <div class="container" id="results-container">
+    
+
+    <div class="dayPlan">
+      <h2>Your Day Plan:</h2>
     </div>
     <div id="cityDisplay" class="row">
     </div>
+
+    <div id="map-wrapper" class="py-5"></div>
+
+    <div class="py-5 hidden" id="outdoors-div">
+      <label for="outdoors-search"><span class="outdoors-search-text">Enter a city to search for nearby Parks:
+        </span></label>
+      <input type="text" id="outdoors-search" name="outdoors-search">
+      <button type="button" id="outdoors" class="test-button">Go Outdoors!</button>
+      <div id="display-outdoors" class="container row card-deck d-flex justify-content-center">
+      </div>
+      <div id="outdoors-errors">
+      </div>
+    </div>
+
+    <div class="movies py-5 hidden">
+      <div class="row" id="movies">
+      </div>
+      <button class="test-button" type="button" id="movie-button">Get local movies</button>
+    </div>
   </div>
-  <div id="map-wrapper" class="py-5"></div>
+
   <button id="myBtn" title="Go to top">^</button>
 </body>
 

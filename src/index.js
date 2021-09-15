@@ -24,14 +24,16 @@ function displayResult(items) {
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">${item.poi.name}</h5>
             <p class="card-text">${item.description}</p>
-            <a href="#" class="btn btn-primary mt-auto">Go somewhere</a>
           </div>
         </div>
       </div>`;
     })
     .join("");
   $("#container").hide();
+  $("#navBar").show();
   $(".dayPlan").show();
+  $("#outdoors-div").show();
+  $(".movies").show();
   $("#cityDisplay").empty();
   $("#cityDisplay").append(pointsHtml);
   const geo = createGeoJson(items);
@@ -41,6 +43,9 @@ function displayResult(items) {
 }
 
 $(document).ready(function () {
+  $("#reset-button").click(function () {
+    resetDisplay();
+  });
   $('.city').click(function () {
     const cityName = this.id;
     makeApiCall(cityName);
@@ -53,9 +58,9 @@ $(document).ready(function () {
     }
   });
   $('#myBtn').click(function () {
-    $('html, body').animate({ scrollTop: 0 }, 800);
+    $('html, body').animate({ scrollTop: 0 },50);
   });
-  $(".test-button").on("click", function() {
+  $("#movie-button").on("click", function() {
     Movies.getMovies()
       .then(result => {
         displayMovies(result.films);
@@ -66,6 +71,17 @@ $(document).ready(function () {
     $(".test-button").hide();
   });
 });
+
+function resetDisplay() {
+  $("#cityDisplay").empty();
+  $("#map-wrapper").empty();
+  $("#display-outdoors").empty();
+  $("#outdoors-errors").empty();
+  $("#movies").empty();
+  $("#navBar").hide();
+  $("#results-container").hide();
+  $("#container").show();
+}
 
 function createGeoJson(items) {
   const features = items.map((item, i) => {
