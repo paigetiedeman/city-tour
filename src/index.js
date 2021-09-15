@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Default from './assets/images/default.jpg';
 import cityTour from './js/city-tour.js';
+import OutdoorsRec from "./js/outdoors.js";
 import { Movies } from "./js/movies";
 
 async function makeApiCall(city) {
@@ -42,35 +43,75 @@ function displayResult(items) {
   );
 }
 
-$(document).ready(function () {
-  $("#reset-button").click(function () {
-    resetDisplay();
-  });
-  $('.city').click(function () {
-    const cityName = this.id;
-    makeApiCall(cityName);
-  });
-  $(window).scroll(function () {
-    if ($(this).scrollTop()) {
-      $('#myBtn').fadeIn();
-    } else {
-      $('#myBtn').fadeOut();
+
+async function outdoorsIdCall(citySearch) {
+  const response = await OutdoorsRec.getOutdoors();
+  const searchIds = await OutdoorsRec.getIds(citySearch);
+  let areaIds = [];
+  for (let id = 0; id < searchIds.RECDATA.length; id++) {
+    areaIds.push(searchIds.RECDATA[id].RecAreaID);
+  }
+  console.log(areaIds);
+  outdoorsApiCalls(response.RECDATA, areaIds);
+}
+
+async function outdoorsUrlApiCall(outdoorsURL) {
+  try {
+    const outdoorsLink = await OutdoorsRec.getOutdoorsURL(outdoorsURL);
+    let urlLink = outdoorsLink.RECDATA[0].URL;
+    return urlLink;
+  }
+  catch (error) {
+    document.getElementById("outdoors-errors").innerHTML = error.message;
+  }
+}
+
+async function outdoorsApiCalls(items, areaIds) {
+  const searchItems = areaIds;
+  let parkName = [];
+  let parkDescription = [];
+  let parkLink = [];
+  for (let i = 0; i < items.length; i++) {
+    if (searchItems.includes(items[i].RecAreaID)) {
+      let outdoorsURL = items[i].RecAreaID;
+      let urlLink = await outdoorsUrlApiCall(outdoorsURL);
+      parkName.push(items[i].RecAreaName);
+      parkDescription.push(items[i].RecAreaDescription);
+      parkLink.push(urlLink);
+    } 
+  }
+  displayOutdoors(parkName, parkDescription, parkLink);
+}
+
+function displayOutdoors(parkName, parkDescription, parkLink) {
+  console.log(parkName);
+  console.log(parkDescription);
+  console.log(parkLink);
+  
+  if (parkName.length === 0) {
+    $("#display-outdoors").text("This search returned no results; some park information may be out of date or unavailable.");
+  }
+  for (let j = 0; j < 6; j++) {
+    if (typeof parkName[j]!='undefined' && parkName[j]!=null){
+      
+      let pointsHtml =
+      `<div class="card col-md-4" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">${parkName[j]}</h5>
+        <hr>
+        <div class="scroll">
+        <p class="card-text">${parkDescription[j]}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-center">
+        <a href=${parkLink[j]} class="btn btn-primary">Learn More</a>
+        </div>
+        </div>
+        </div>`;
+      $("#display-outdoors").append(pointsHtml);
+      
     }
-  });
-  $('#myBtn').click(function () {
-    $('html, body').animate({ scrollTop: 0 },50);
-  });
-  $("#movie-button").on("click", function() {
-    Movies.getMovies()
-      .then(result => {
-        displayMovies(result.films);
-      })
-      .catch(error => {
-        $("#movies").append(`<p>Sorry, something went wrong and we couldn't fetch your movies: ${error}</p>`);
-      });
-    $(".test-button").hide();
-  });
-});
+  }
+}
 
 function resetDisplay() {
   $("#cityDisplay").empty();
@@ -123,14 +164,49 @@ function displayMovies(films) {
     </div>
     </div>`);
     Movies.getTheaters(film.film_id)
-      .then(result => {
-        for (let theaterId in result.cinemas) {
-          $(`#${film.film_id}`).append(`<p>${result.cinemas[theaterId].cinema_name}</p>
-          <p>${result.cinemas[theaterId].time}</p>`);
-        }
-      })
-      .catch(error => {
-        $(`#${film.film_id}`).append(`<p>Sorry, something went wrong and we couldn't fetch your nearest theaters showing this movie: ${error}</p>`);
-      });
+    .then(result => {
+      for (let theaterId in result.cinemas) {
+        $(`#${film.film_id}`).append(`<p>${result.cinemas[theaterId].cinema_name}</p>
+        <p>${result.cinemas[theaterId].time}</p>`);
+      }
+    })
+    .catch(error => {
+      $(`#${film.film_id}`).append(`<p>Sorry, something went wrong and we couldn't fetch your nearest theaters showing this movie: ${error}</p>`);  
+    });
   }
 }
+
+$(document).ready(function () {
+  $("#reset-button").click(function () {
+    resetDisplay();
+  });
+  $('.city').click(function () {
+    const cityName = this.id;
+    makeApiCall(cityName);
+  });
+  $("#outdoors").click(function () {
+    $("#display-outdoors, #outdoors-errors").empty();
+    const citySearch = $("#outdoors-search").val();
+    outdoorsIdCall(citySearch);
+  });
+    $(window).scroll(function () {
+      if ($(this).scrollTop()) {
+        $('#myBtn').fadeIn();
+      } else {
+        $('#myBtn').fadeOut();
+      }
+    });
+    $('#myBtn').click(function () {
+      $('html, body').animate({ scrollTop: 0 }, 50);
+    });
+    $("#movie-button").on("click", function() {
+      Movies.getMovies()
+      .then(result => {
+        displayMovies(result.films);
+      })
+      .catch(error => {
+        $("#movies").append(`<p>Sorry, something went wrong and we couldn't fetch your movies: ${error}</p>`);
+      });
+      $("#movie-button").hide();
+  });
+});
