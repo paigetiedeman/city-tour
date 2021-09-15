@@ -93,29 +93,28 @@ function createGeoJson(items) {
 }
 
 function displayMovies(films) {
-    for (let i in films) {
-      let film = films[i];
-      $("#movies").append(`
-      <div class="col-sm-4">
-      <div class="card">
-      <img class="card-img-top" src="${film.images.poster[1].medium.film_image}" alt="Card image cap">
-      <div class="card-body" id="${film.film_id}">
-      <h5 class="card-title">Movie: ${film.film_name}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Release Date: ${film.release_dates[0].release_date}, Rated: ${film.age_rating[0].rating}</h6>
-      <p>${film.synopsis_long}</p><br>
-      </div>
-      </div>
-      </div>`);
-      Movies.getTheaters(film.film_id)
-        .then(result => {
-          for (let theaterId in result.cinemas) {
-            $(`#${film.film_id}`).append(`<p>${result.cinemas[theaterId].cinema_name}</p>
-            <p>${result.cinemas[theaterId].time}</p>`);
-          }
-        })
-        .catch(error => {
-          $(`#${film.film_id}`).append(`<p>Sorry, something went wrong and we couldn't fetch your nearest theaters showing this movie: ${error}</p>`);
-        });
-    }
+  for (let i in films) {
+    let film = films[i];
+    $("#movies").append(`
+    <div class="col-sm-4">
+    <div class="card">
+    <img class="card-img-top" src="${film.images.poster[1].medium.film_image}" alt="Card image cap">
+    <div class="card-body" id="${film.film_id}">
+    <h5 class="card-title">Movie: ${film.film_name}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Release Date: ${film.release_dates[0].release_date}, Rated: ${film.age_rating[0].rating}</h6>
+    <p>${film.synopsis_long}</p><br>
+    </div>
+    </div>
+    </div>`);
+    Movies.getTheaters(film.film_id)
+      .then(result => {
+        for (let theaterId in result.cinemas) {
+          $(`#${film.film_id}`).append(`<p>${result.cinemas[theaterId].cinema_name}</p>
+          <p>${result.cinemas[theaterId].time}</p>`);
+        }
+      })
+      .catch(error => {
+        $(`#${film.film_id}`).append(`<p>Sorry, something went wrong and we couldn't fetch your nearest theaters showing this movie: ${error}</p>`);
+      });
   }
 }
