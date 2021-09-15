@@ -6,7 +6,6 @@ import Default from './assets/images/default.jpg';
 import cityTour from './js/city-tour.js';
 
 async function makeApiCall(city) {
-  console.log(city);
   const response = await cityTour.getTour(city);
   displayResult(response.results[0].days[0].itinerary_items);
 }
@@ -16,7 +15,7 @@ function displayResult(items) {
     .map((item) => {
       let imageUrl = Default;
       if (item.poi.images.length > 0) {
-        imageUrl = item.poi.images[0].sizes.thumbnail.url;
+        imageUrl = item.poi.images[0].source_url;
       }
       return `<div class="col my-3">
         <div class="card mx-auto h-100" style="width: 18rem;">
@@ -31,6 +30,7 @@ function displayResult(items) {
     })
     .join("");
   $("#container").hide();
+  $(".dayPlan").show();
   $("#cityDisplay").empty();
   $("#cityDisplay").append(pointsHtml);
   const geo = createGeoJson(items);
@@ -40,9 +40,19 @@ function displayResult(items) {
 }
 
 $(document).ready(function () {
-  $(".city").click(function () {
+  $('.city').click(function () {
     const cityName = this.id;
     makeApiCall(cityName);
+  });
+  $(window).scroll(function () {
+    if ($(this).scrollTop()) {
+      $('#myBtn').fadeIn();
+    } else {
+      $('#myBtn').fadeOut();
+    }
+  });
+  $('#myBtn').click(function () {
+    $('html, body').animate({ scrollTop: 0 }, 800);
   });
 });
 
