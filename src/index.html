@@ -1,33 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kavoon&family=Abril+Fatface&display=swap" rel="stylesheet">
   <title>City Tour</title>
 </head>
 
 <body>
   <div id="container" class="container">
-    <h1>City Tour</h1>
-    <h2>What sort of mood are you in?</h2>
-    <form id="get-location">
-      <!-- <input type="text" id="location" placeholder="ex: Paris" /><br /> -->
-      <div id ="moods">
-        <h4 id ="Seattle">Happy</h4>
-        <h4 id="Amsterdam">Relaxed</h4>
-        <h4 id="London">Random</h4>
-        <h4 id="Barcelona">Active</h4>
-        <h4 id="Paris">Sad</h4>
-        <h4 id="Tokyo">Inquisitive??</h4>
-      </div>
-      <button class="btn-success" id="location-info">Go here</button>
-    </form>
+  <div class="jumbotron jumbotron-fluid">
+    <h1>Moody Day Tours</h1>
+    <p>Choose from below to receive a tour!</p>
   </div>
-  <div id="display-button" class="btn btn-success">Display</div>
-  <div class="movies">
+    <div id="flex-container">
+      <div id="Seattle" class="city">Happy</div>
+      <div id="Amsterdam" class="city">Relaxed</div>
+      <div id="Amalfi" class="city">Drained</div>
+      <div id="Paris" class="city">Sad</div>
+      <div id="Barcelona" class="city">Restless</div>
+      <div id="Tokyo" class="city">Curious</div>
+      <div id="Sydney" class="city">Energetic</div>
+      <div id="London" class="city">Surprise</div>
+    </div>
+    <br>
+    <div class="movies">
     <div class="row" id="movies">
 
     </div>
     <button class="test-button" type="button">Press Here!</button>
   </div>
+  </div>
+  <br>
+  <div class="container">
+    <div class="dayPlan"><h2>Your Day Plan:</h2>
+    </div>
+    <div id="cityDisplay" class="row">
+    </div>
+  </div>
+  <div id="map-wrapper" class="py-5"></div>
+  <button id="myBtn" title="Go to top">^</button>
 </body>
-</html>
 
+</html>
