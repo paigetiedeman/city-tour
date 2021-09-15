@@ -1,6 +1,6 @@
 # City Tour
 
-#### This is a site..
+#### This site recommends a user a tour, movies and national parks from click "moods".
 
 #### _By Paige Tiedeman, Nathan Fletcher, Connor Hansen, Diego Serafico & Mark Chang_
 
@@ -17,11 +17,12 @@
 * Webpack
 * Popper
 * Package.json
+* [Triposo-API](https://www.triposo.com/api/documentation/20210615/)
 
 
 ## Description
 
-This simple HTML site uses Javascript...
+This application uses four different API's to suggest a day trip with map location, movies and national parks to visit based on the mood clicked.
 
 ## Setup/Installation Requirements
 
@@ -32,14 +33,20 @@ to "start": "npm run build; webpack-dev-server --open --mode development"_
 * _Commit and push your .gitignore file to your repo_
 * _Run `$ npm install`_
 * _Check title on package.json and webpack file_
-* _Go to https://www.exchangerate-api.com/ and generate an API Key_
-* _Type `$ touch .env` to create a document to save your API key as API_KEY={your key here}_
+* _Go to https://www.triposo.com/api/signup and generate an API Key_
+* _Type `$ touch .env` to create a document to save your API key as Account_Key={your key here} & token={your token here}_
+* _Go to https://ridb.recreation.gov/landing to generate an API Key_
+  - add API_KEY={Your-Api-Key} to the .env file.
+* _Add MAP_KEY=pk.eyJ1IjoibmF0aGFubWFwYm94ZGV2IiwiYSI6ImNrcHdkN2p2aDA0Z2oyeG9ieDZicTZudm4ifQ.tUypg6GRjhED2bic-GkFnw (this is a public test key) to the .env file.
+* _Go to https://developer.movieglu.com/ and generate an API Key_
+* _In your .env file add the authorization, client, and api key for movies_
 * _Type `$ npm run build`, to build your environment_
 * _Type `$ npm run start`, to open in your browser_
+* _Click on any of the moods to get your result_
 
 ## Known Bugs
 
-* _N/A_
+* _Movies and National Parks API only work for US cities_
 
 ## License
 
@@ -50,7 +57,7 @@ Copyright (c) 2021 Paige Tiedeman, Nathan Fletcher, Connor Hansen, Diego Serafic
 ## Contact Information
 
 _Paige Tiedeman @ github.com/paigetiedeman_
-_Nathan Fletcher_
-_Connor Hansen_
-_Diego Serafico_
+_Nathan Fletcher @ github.com/nathanfletch_
+_Connor Hansen @ github.com/chansen1395_
+_Diego Serafico @ github.com/DiegoSerafico_
 _Mark Chang_

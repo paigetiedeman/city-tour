@@ -12,13 +12,6 @@ async function makeApiCall(city) {
   displayResult(response.results[0].days[0].itinerary_items);
 }
 
-// let city1 = $("#Seattle").val();
-// let city2 = $("#Amsterdam").val();
-// let city3 = $("#London").val();
-// let city4 = $("#Barcelona").val();
-// let city5 = $("#Paris").val();
-// let city6 = $("#Tokyo").val();
-
 function displayResult(items) {
   const pointsHtml = items
     .map((item) => {
@@ -32,14 +25,16 @@ function displayResult(items) {
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">${item.poi.name}</h5>
             <p class="card-text">${item.description}</p>
-            <a href="#" class="btn btn-primary mt-auto">Go somewhere</a>
           </div>
         </div>
       </div>`;
     })
     .join("");
   $("#container").hide();
+  $("#navBar").show();
   $(".dayPlan").show();
+  $("#outdoors-div").show();
+  $(".movies").show();
   $("#cityDisplay").empty();
   $("#cityDisplay").append(pointsHtml);
   const geo = createGeoJson(items);
@@ -48,9 +43,7 @@ function displayResult(items) {
   );
 }
 
-//************************************** */
-//********BEGINNING OF CHANGES********** */
-//************************************** */
+
 async function outdoorsIdCall(citySearch) {
   const response = await OutdoorsRec.getOutdoors();
   const searchIds = await OutdoorsRec.getIds(citySearch);
@@ -94,7 +87,7 @@ function displayOutdoors(parkName, parkDescription, parkLink) {
   console.log(parkName);
   console.log(parkDescription);
   console.log(parkLink);
-
+  
   if (parkName.length === 0) {
     $("#display-outdoors").text("This search returned no results; some park information may be out of date or unavailable.");
   }
@@ -102,8 +95,18 @@ function displayOutdoors(parkName, parkDescription, parkLink) {
     if (typeof parkName[j]!='undefined' && parkName[j]!=null){
       
       let pointsHtml =
-        `<div class="card col-md-4" style="width: 18rem;">
-        <div class="card-body">
+      // `<div class="col my-3">
+      //   <div class="card mx-auto h-100" style="width: 18rem;">
+      //     <img class="card-img-top" src=${imageUrl} alt="Card image cap">
+      //     <div class="card-body d-flex flex-column">
+      //       <h5 class="card-title">${item.poi.name}</h5>
+      //       <p class="card-text">${item.description}</p>
+      //     </div>
+      //   </div>
+      // </div>`
+      `<div class="col my-3">
+      <div class="card mx-auto h-100" style="width: 18rem;">
+      <div class="card-body">
         <h5 class="card-title">${parkName[j]}</h5>
         <hr>
         <div class="scroll">
@@ -113,15 +116,24 @@ function displayOutdoors(parkName, parkDescription, parkLink) {
         <a href=${parkLink[j]} class="btn btn-primary">Learn More</a>
         </div>
         </div>
-        </div>`;
+        </div></div>`;
       $("#display-outdoors").append(pointsHtml);
       
     }
   }
 }
-//*********************************** */
-//*********END OF CHANGES************ */
-//*********************************** */
+
+function resetDisplay() {
+  $("#cityDisplay").empty();
+  $("#map-wrapper").empty();
+  $("#display-outdoors").empty();
+  $("#outdoors-errors").empty();
+  $("#movies").empty();
+  $("#navBar").hide();
+  $("#results-container").hide();
+  $("#container").show();
+}
+
 function createGeoJson(items) {
   const features = items.map((item, i) => {
     return {
@@ -138,7 +150,7 @@ function createGeoJson(items) {
       },
     };
   });
-
+  
   const geoJsonObject = {
     type: "FeatureCollection",
     features: features,
@@ -147,23 +159,46 @@ function createGeoJson(items) {
   return encodeURIComponent(JSON.stringify(geoJsonObject));
 }
 
+function displayMovies(films) {
+  for (let i in films) {
+    let film = films[i];
+    $("#movies").append(`
+    <div class="col-sm-4">
+    <div class="card h-100">
+    <img class="card-img-top" src="${film.images.poster[1].medium.film_image}" alt="Card image cap">
+    <div class="card-body" id="${film.film_id}">
+    <h5 class="card-title">Movie: ${film.film_name}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Release Date: ${film.release_dates[0].release_date}, Rated: ${film.age_rating[0].rating}</h6>
+    <p>${film.synopsis_long}</p><br>
+    </div>
+    </div>
+    </div>`);
+    Movies.getTheaters(film.film_id)
+    .then(result => {
+      for (let theaterId in result.cinemas) {
+        $(`#${film.film_id}`).append(`<p>${result.cinemas[theaterId].cinema_name}</p>
+        <p>${result.cinemas[theaterId].time}</p>`);
+      }
+    })
+    .catch(error => {
+      $(`#${film.film_id}`).append(`<p>Sorry, something went wrong and we couldn't fetch your nearest theaters showing this movie: ${error}</p>`);  
+    });
+  }
+}
+
 $(document).ready(function () {
+  $("#reset-button").click(function () {
+    resetDisplay();
+  });
   $('.city').click(function () {
     const cityName = this.id;
     makeApiCall(cityName);
   });
-
-  //**************************** */
-  //*******BEGINNING OF CHANGES* */
-  //**************************** */
   $("#outdoors").click(function () {
     $("#display-outdoors, #outdoors-errors").empty();
     const citySearch = $("#outdoors-search").val();
     outdoorsIdCall(citySearch);
-    // outdoorsIdCall();
-    //**************************** */
-    //*******END OF CHANGES******* */
-    //**************************** */
+  });
     $(window).scroll(function () {
       if ($(this).scrollTop()) {
         $('#myBtn').fadeIn();
@@ -172,45 +207,16 @@ $(document).ready(function () {
       }
     });
     $('#myBtn').click(function () {
-      $('html, body').animate({ scrollTop: 0 }, 800);
+      $('html, body').animate({ scrollTop: 0 }, 50);
     });
-    $(".test-button").on("click", function () {
+    $("#movie-button").on("click", function() {
       Movies.getMovies()
-        .then(result => {
-          displayMovies(result.films);
-        })
-        .catch(error => {
-          $("#movies").append(`<p>Sorry, something went wrong and we couldn't fetch your movies: ${error}</p>`);
-        });
-      $(".test-button").hide();
-    });
+      .then(result => {
+        displayMovies(result.films);
+      })
+      .catch(error => {
+        $("#movies").append(`<p>Sorry, something went wrong and we couldn't fetch your movies: ${error}</p>`);
+      });
+      $("#movie-button").hide();
   });
-
-
-  function displayMovies(films) {
-    for (let i in films) {
-      let film = films[i];
-      $("#movies").append(`
-      <div class="col-sm-4">
-      <div class="card">
-      <img class="card-img-top" src="${film.images.poster[1].medium.film_image}" alt="Card image cap">
-      <div class="card-body" id="${film.film_id}">
-      <h5 class="card-title">Movie: ${film.film_name}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Release Date: ${film.release_dates[0].release_date}, Rated: ${film.age_rating[0].rating}</h6>
-      <p>${film.synopsis_long}</p><br>
-      </div>
-      </div>
-      </div>`);
-      Movies.getTheaters(film.film_id)
-        .then(result => {
-          for (let theaterId in result.cinemas) {
-            $(`#${film.film_id}`).append(`<p>${result.cinemas[theaterId].cinema_name}</p>
-            <p>${result.cinemas[theaterId].time}</p>`);
-          }
-        })
-        .catch(error => {
-          $(`#${film.film_id}`).append(`<p>Sorry, something went wrong and we couldn't fetch your nearest theaters showing this movie: ${error}</p>`);
-        });
-    }
-  }
 });
