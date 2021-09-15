@@ -40,9 +40,19 @@ function displayResult(items) {
 }
 
 $(document).ready(function () {
-  $(".city").click(function () {
+  $('.city').click(function () {
     const cityName = this.id;
     makeApiCall(cityName);
+  });
+  $(window).scroll(function () {
+    if ($(this).scrollTop()) {
+      $('#myBtn').fadeIn();
+    } else {
+      $('#myBtn').fadeOut();
+    }
+  });
+  $('#myBtn').click(function () {
+    $('html, body').animate({ scrollTop: 0 }, 800);
   });
 });
 
