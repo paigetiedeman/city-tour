@@ -117,4 +117,4 @@ function displayMovies(films) {
         $(`#${film.film_id}`).append(`<p>Sorry, something went wrong and we couldn't fetch your nearest theaters showing this movie: ${error}</p>`);
       });
   }
-
+}
