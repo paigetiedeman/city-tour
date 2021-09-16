@@ -19,7 +19,7 @@
 * [Triposo-API](https://www.triposo.com/api/documentation/20210615/)
 * [Movie-glu](https://developer.movieglu.com/v2/api-index/quick-start-guide/)
 * [Mapbbox](https://docs.mapbox.com/api/maps/static-images/)
-* [RIDB-API](https://ridb.recreation.gov/docs)
+* [Recration Information Database API](https://ridb.recreation.gov/landing)
 
 
 ## Description

@@ -190,3 +190,8 @@ p {
 .hidden {
   display: none;
 }
+
+.scroll {
+  max-height: 350px;
+  overflow-y: auto;
+}

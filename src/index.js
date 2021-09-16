@@ -51,7 +51,6 @@ async function outdoorsIdCall(citySearch) {
   for (let id = 0; id < searchIds.RECDATA.length; id++) {
     areaIds.push(searchIds.RECDATA[id].RecAreaID);
   }
-  console.log(areaIds);
   outdoorsApiCalls(response.RECDATA, areaIds);
 }
 
@@ -84,19 +83,14 @@ async function outdoorsApiCalls(items, areaIds) {
 }
 
 function displayOutdoors(parkName, parkDescription, parkLink) {
-  console.log(parkName);
-  console.log(parkDescription);
-  console.log(parkLink);
-  
   if (parkName.length === 0) {
     $("#display-outdoors").text("This search returned no results; some park information may be out of date or unavailable.");
   }
   for (let j = 0; j < 6; j++) {
     if (typeof parkName[j]!='undefined' && parkName[j]!=null){
-      
       let pointsHtml =
       `<div class="col my-3">
-      <div class="card mx-auto h-100" style="width: 18rem;">
+      <div class="card mx-auto" style="width: 18rem; height: 500px;">
       <div class="card-body">
         <h5 class="card-title">${parkName[j]}</h5>
         <hr>
@@ -104,12 +98,11 @@ function displayOutdoors(parkName, parkDescription, parkLink) {
         <p class="card-text">${parkDescription[j]}</p>
         </div>
         <div class="card-footer d-flex justify-content-center">
-        <a href=${parkLink[j]} class="btn btn-primary">Learn More</a>
+        <a href=${parkLink[j]} class="btn test-button">Learn More</a>
         </div>
         </div>
         </div></div>`;
       $("#display-outdoors").append(pointsHtml);
-      
     }
   }
 }
