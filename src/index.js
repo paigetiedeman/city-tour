@@ -21,7 +21,7 @@ function displayResult(items) {
       }
       return `<div class="col my-3">
         <div class="card mx-auto h-100" style="width: 18rem;">
-          <img class="card-img-top" src=${imageUrl} alt="Card image cap">
+          <img class="card-img-top tour-image" src=${imageUrl} alt="Card image cap">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">${item.poi.name}</h5>
             <p class="card-text">${item.description}</p>
@@ -31,6 +31,7 @@ function displayResult(items) {
     })
     .join("");
   $("#container").hide();
+  $("#results-container").show();
   $("#navBar").show();
   $(".dayPlan").show();
   $("#outdoors-div").show();
@@ -84,10 +85,6 @@ async function outdoorsApiCalls(items, areaIds) {
 }
 
 function displayOutdoors(parkName, parkDescription, parkLink) {
-  console.log(parkName);
-  console.log(parkDescription);
-  console.log(parkLink);
-  
   if (parkName.length === 0) {
     $("#display-outdoors").text("This search returned no results; some park information may be out of date or unavailable.");
   }
@@ -95,28 +92,22 @@ function displayOutdoors(parkName, parkDescription, parkLink) {
     if (typeof parkName[j]!='undefined' && parkName[j]!=null){
       
       let pointsHtml =
-      // `<div class="col my-3">
-      //   <div class="card mx-auto h-100" style="width: 18rem;">
-      //     <img class="card-img-top" src=${imageUrl} alt="Card image cap">
-      //     <div class="card-body d-flex flex-column">
-      //       <h5 class="card-title">${item.poi.name}</h5>
-      //       <p class="card-text">${item.description}</p>
-      //     </div>
-      //   </div>
-      // </div>`
+      
       `<div class="col my-3">
-      <div class="card mx-auto h-100" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">${parkName[j]}</h5>
-        <hr>
-        <div class="scroll">
-        <p class="card-text">${parkDescription[j]}</p>
+        <div class="card mx-auto h-100" style="width: 18rem;">
+          
+          <div class="card-body">
+            <h5 class="card-title">${parkName[j]}</h5>
+            <hr>
+            <div class="scroll">
+              <p class="card-text">${parkDescription[j]}</p>
+            </div>
+          </div>
+          <div class="card-footer d-flex justify-content-center">
+            <a href=${parkLink[j]} class="btn inverted-button">Learn More</a>
+          </div>
         </div>
-        <div class="card-footer d-flex justify-content-center">
-        <a href=${parkLink[j]} class="btn btn-primary">Learn More</a>
-        </div>
-        </div>
-        </div></div>`;
+      </div>`;
       $("#display-outdoors").append(pointsHtml);
       
     }
@@ -162,16 +153,18 @@ function createGeoJson(items) {
 function displayMovies(films) {
   for (let i in films) {
     let film = films[i];
+     
     $("#movies").append(`
-    <div class="col-sm-4">
-    <div class="card h-100">
-    <img class="card-img-top" src="${film.images.poster[1].medium.film_image}" alt="Card image cap">
-    <div class="card-body" id="${film.film_id}">
-    <h5 class="card-title">Movie: ${film.film_name}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Release Date: ${film.release_dates[0].release_date}, Rated: ${film.age_rating[0].rating}</h6>
-    <p>${film.synopsis_long}</p><br>
-    </div>
-    </div>
+    <div class="col my-3">
+      <div class="card mx-auto h-100" style="width: 18rem;">
+        <img class="card-img-top movie-image" src="${film.images.poster[1].medium.film_image}" alt="Card image cap">
+        <div class="card-body d-flex flex-column" id="${film.film_id}">
+          <h5 class="card-title">Movie: ${film.film_name}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Release Date: ${film.release_dates[0].release_date}, Rated: ${film.age_rating[0].rating}</h6>
+          <p>${film.synopsis_long}</p>
+          <br>
+        </div>
+      </div>
     </div>`);
     Movies.getTheaters(film.film_id)
     .then(result => {
