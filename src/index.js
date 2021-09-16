@@ -52,7 +52,6 @@ async function outdoorsIdCall(citySearch) {
   for (let id = 0; id < searchIds.RECDATA.length; id++) {
     areaIds.push(searchIds.RECDATA[id].RecAreaID);
   }
-  console.log(areaIds);
   outdoorsApiCalls(response.RECDATA, areaIds);
 }
 
@@ -90,7 +89,6 @@ function displayOutdoors(parkName, parkDescription, parkLink) {
   }
   for (let j = 0; j < 6; j++) {
     if (typeof parkName[j]!='undefined' && parkName[j]!=null){
-      
       let pointsHtml =
       
       `<div class="col my-3">
@@ -109,7 +107,6 @@ function displayOutdoors(parkName, parkDescription, parkLink) {
         </div>
       </div>`;
       $("#display-outdoors").append(pointsHtml);
-      
     }
   }
 }
@@ -167,15 +164,15 @@ function displayMovies(films) {
       </div>
     </div>`);
     Movies.getTheaters(film.film_id)
-    .then(result => {
-      for (let theaterId in result.cinemas) {
-        $(`#${film.film_id}`).append(`<p>${result.cinemas[theaterId].cinema_name}</p>
-        <p>${result.cinemas[theaterId].time}</p>`);
-      }
-    })
-    .catch(error => {
-      $(`#${film.film_id}`).append(`<p>Sorry, something went wrong and we couldn't fetch your nearest theaters showing this movie: ${error}</p>`);  
-    });
+      .then(result => {
+        for (let theaterId in result.cinemas) {
+          $(`#${film.film_id}`).append(`<p>${result.cinemas[theaterId].cinema_name}</p>
+          <p>${result.cinemas[theaterId].time}</p>`);
+        }
+      })
+      .catch(error => {
+        $(`#${film.film_id}`).append(`<p>Sorry, something went wrong and we couldn't fetch your nearest theaters showing this movie: ${error}</p>`);  
+      });
   }
 }
 
@@ -192,24 +189,24 @@ $(document).ready(function () {
     const citySearch = $("#outdoors-search").val();
     outdoorsIdCall(citySearch);
   });
-    $(window).scroll(function () {
-      if ($(this).scrollTop()) {
-        $('#myBtn').fadeIn();
-      } else {
-        $('#myBtn').fadeOut();
-      }
-    });
-    $('#myBtn').click(function () {
-      $('html, body').animate({ scrollTop: 0 }, 50);
-    });
-    $("#movie-button").on("click", function() {
-      Movies.getMovies()
+  $(window).scroll(function () {
+    if ($(this).scrollTop()) {
+      $('#myBtn').fadeIn();
+    } else {
+      $('#myBtn').fadeOut();
+    }
+  });
+  $('#myBtn').click(function () {
+    $('html, body').animate({ scrollTop: 0 }, 50);
+  });
+  $("#movie-button").on("click", function() {
+    Movies.getMovies()
       .then(result => {
         displayMovies(result.films);
       })
       .catch(error => {
         $("#movies").append(`<p>Sorry, something went wrong and we couldn't fetch your movies: ${error}</p>`);
       });
-      $("#movie-button").hide();
+    $("#movie-button").hide();
   });
 });

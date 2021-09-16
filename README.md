@@ -11,20 +11,25 @@
 * JavaScript
 * JQuery
 * Bootstrap
-* Jest
 * ESLint
 * Babel
 * Webpack
 * Popper
 * Package.json
 * [Triposo-API](https://www.triposo.com/api/documentation/20210615/)
+* [Movie-glu](https://developer.movieglu.com/v2/api-index/quick-start-guide/)
+* [Mapbbox](https://docs.mapbox.com/api/maps/static-images/)
+* [Recration Information Database API](https://ridb.recreation.gov/landing)
 
 
 ## Description
 
-This application uses four different API's to suggest a day trip with map location, movies and national parks to visit based on the mood clicked.
+This application integrates four different API's to suggest a day trip with map locations based on the mood clicked. It also has an option for National Parks based on user search and local movie API that uses coordinates that are currently set in the movie.js file.
 
 ## Setup/Installation Requirements
+
+<details>
+<summary>Setup & Installation Requirements</summary>
 
 * _Clone or download the zip file of this repository to your desktop_
 * _Open in a text editor_
@@ -39,14 +44,20 @@ to "start": "npm run build; webpack-dev-server --open --mode development"_
   - add API_KEY={Your-Api-Key} to the .env file.
 * _Add MAP_KEY=pk.eyJ1IjoibmF0aGFubWFwYm94ZGV2IiwiYSI6ImNrcHdkN2p2aDA0Z2oyeG9ieDZicTZudm4ifQ.tUypg6GRjhED2bic-GkFnw (this is a public test key) to the .env file.
 * _Go to https://developer.movieglu.com/ and generate an API Key_
-* _In your .env file add the authorization, client, and api key for movies_
+* _In your .env file add the MOVIES_AUTHORIZATION=(), MOVIES_CLIENT=(), and API_KEY=() for movies_
 * _Type `$ npm run build`, to build your environment_
 * _Type `$ npm run start`, to open in your browser_
 * _Click on any of the moods to get your result_
+* _Use the Nav Bar to go to different Sections_
+* _Type in a US City to find nearby Parks_
+* _Click the "See Local Movies" Button to show nearby theaters and showing_
+</details>
 
 ## Known Bugs
 
-* _Movies and National Parks API only work for US cities_
+* _National Parks API only work for US cities_
+* _Movies is set to the US and specific coordinates and will not change_
+* _Pick a new mood does not allow for results to populate a second time_
 
 ## License
 
@@ -56,8 +67,8 @@ Copyright (c) 2021 Paige Tiedeman, Nathan Fletcher, Connor Hansen, Diego Serafic
 
 ## Contact Information
 
-_Paige Tiedeman @ github.com/paigetiedeman_
-_Nathan Fletcher @ github.com/nathanfletch_
-_Connor Hansen @ github.com/chansen1395_
-_Diego Serafico @ github.com/DiegoSerafico_
-_Mark Chang_
+_Paige Tiedeman @ github.com/paigetiedeman_  
+_Nathan Fletcher @ github.com/nathanfletch_  
+_Connor Hansen @ github.com/chansen1395_  
+_Diego Serafico @ github.com/DiegoSerafico_  
+_Mark Chang_  
