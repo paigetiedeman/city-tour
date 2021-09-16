@@ -57,6 +57,7 @@ to "start": "npm run build; webpack-dev-server --open --mode development"_
 
 * _National Parks API only work for US cities_
 * _Movies is set to the US and specific coordinates and will not change_
+* _Pick a new mood does not allow for results to populate a second time_
 
 ## License
 

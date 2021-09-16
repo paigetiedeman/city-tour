@@ -95,15 +95,6 @@ function displayOutdoors(parkName, parkDescription, parkLink) {
     if (typeof parkName[j]!='undefined' && parkName[j]!=null){
       
       let pointsHtml =
-      // `<div class="col my-3">
-      //   <div class="card mx-auto h-100" style="width: 18rem;">
-      //     <img class="card-img-top" src=${imageUrl} alt="Card image cap">
-      //     <div class="card-body d-flex flex-column">
-      //       <h5 class="card-title">${item.poi.name}</h5>
-      //       <p class="card-text">${item.description}</p>
-      //     </div>
-      //   </div>
-      // </div>`
       `<div class="col my-3">
       <div class="card mx-auto h-100" style="width: 18rem;">
       <div class="card-body">
