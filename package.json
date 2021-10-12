@@ -1,4 +1,5 @@
 {
+  "homepage": "https://paigetiedeman.github.io//city-tour",
   "name": "template-repo",
   "version": "1.0.0",
   "description": "* HTML\r * CSS\r * JavaScript\r * JQuery\r * Bootstrap\r * Jest\r * ESLint\r * Babel\r * Webpack\r * Popper\r * Package.json",
@@ -7,7 +8,8 @@
     "build": "webpack --mode development",
     "start": "npm run build & webpack-dev-server --open --mode development",
     "lint": "eslint src/*.js",
-    "test": "jest --coverage --silent=false"
+    "test": "jest --coverage --silent=false",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
@@ -18,6 +20,7 @@
     "eslint": "^6.3.0",
     "eslint-loader": "^3.0.0",
     "file-loader": "^6.2.0",
+    "gh-pages": "^3.2.3",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.9.0",
@@ -41,6 +44,5 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/paigetiedeman/city-tour/issues"
-  },
-  "homepage": "https://github.com/paigetiedeman/city-tour#readme"
+  }
 }
