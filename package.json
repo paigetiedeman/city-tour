@@ -1,16 +1,15 @@
 {
   "homepage": "https://paigetiedeman.github.io/city-tour",
-  "name": "template-repo",
+  "name": "city-tour",
   "version": "1.0.0",
-  "description": "* HTML\r * CSS\r * JavaScript\r * JQuery\r * Bootstrap\r * Jest\r * ESLint\r * Babel\r * Webpack\r * Popper\r * Package.json",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode development",
     "start": "npm run build & webpack-dev-server --open --mode development",
     "lint": "eslint src/*.js",
     "test": "jest --coverage --silent=false",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
