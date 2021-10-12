@@ -22,7 +22,7 @@
 * [Recration Information Database API](https://ridb.recreation.gov/landing)
 
 
-## Description
+## Description  
 
 This application integrates four different API's to suggest a day trip with map locations based on the mood clicked. It also has an option for National Parks based on user search and local movie API that uses coordinates that are currently set in the movie.js file.
 
