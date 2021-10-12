@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kavoon&family=Abril+Fatface&display=swap" rel="stylesheet">
+  <title>City Tour</title>
+</head>
+
+<body>
+  
+
+  <div id="container" class="py-4 container">
+    <div class="jumbotron jumbotron-fluid">
+      <h1>Moody Day Tours</h1>
+      <p>Choose from below to receive a tour!</p>
+    </div>
+    <div id="flex-container">
+      <div id="Seattle" class="city">Happy</div>
+      <div id="Amsterdam" class="city">Relaxed</div>
+      <div id="Amalfi" class="city">Drained</div>
+      <div id="Paris" class="city">Sad</div>
+      <div id="Barcelona" class="city">Restless</div>
+      <div id="Tokyo" class="city">Curious</div>
+      <div id="Sydney" class="city">Energetic</div>
+      <div id="London" class="city">Surprise</div>
+    </div>
+  </div>
+
+  <nav id="navBar" class="hidden navbar">
+    
+    <div>
+      <ul class="p-2 navbar-nav d-flex flex-row">
+        <li class="nav-link mr-auto p-2" id="reset-button">Pick a new mood</li>
+        <div id="right" class="ml-auto d-flex flex-row">
+          <li class="nav-item pe-2">
+            <a class="nav-link" href="#cityDisplay">Tour</a>
+          </li>
+          <li class="nav-item pe-2">
+            <a class="nav-link" href="#map-wrapper">Map</a>
+          </li>
+          <li class="nav-item pe-2">
+            <a class="nav-link" href="#outdoors-search">Outdoors</a>
+          </li>
+          <li class="nav-item pe-2">
+            <a class="nav-link" href="#movies">Movies</a>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container" id="results-container">
+    
+
+    <div class="dayPlan">
+      <h2>Your Day Plan:</h2>
+    </div>
+    <div id="cityDisplay" class="row">
+    </div>
+
+    <div id="map-wrapper" class="py-5"></div>
+
+    <div class="py-5 hidden" id="outdoors-div">
+      <label for="outdoors-search" class="form-label"><span class="outdoors-search-text">Enter a city to search for nearby Parks:
+        </span></label>
+      <input type="text" id="outdoors-search" name="outdoors-search" class="form-control">
+      <button type="button" id="outdoors" class="test-button">Go Outdoors!</button>
+      <div id="display-outdoors" class="container row card-deck d-flex justify-content-center">
+      </div>
+      <div id="outdoors-errors">
+      </div>
+    </div>
+
+    <div class="movies py-5 hidden">
+      <div class="row" id="movies">
+      </div>
+      <button class="test-button" type="button" id="movie-button">See Local Movies</button>
+    </div>
+  </div>
+  <button id="myBtn" title="Go to top">^</button>
+<script type="text/javascript" src="bundle.js"></script></body>
+
+</html>
